@@ -27,6 +27,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import Link from "next/link";
 
 const items = [
 	{
@@ -66,12 +67,12 @@ export function AppSidebar() {
 							asChild
 							className="data-[slot=sidebar-menu-button]:p-1.5!"
 						>
-							<a href="#">
+							<Link href="/">
 								<Calendar className="size-5!" />
 								<span className="text-base font-semibold">
 									POKEINFO
 								</span>
-							</a>
+							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>

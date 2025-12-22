@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "./ui/button";
 import {
@@ -13,54 +15,89 @@ import {
 	SwordIcon,
 	WandSparklesIcon,
 } from "lucide-react";
+import { TYPE_STYLES } from "@/data/tempData";
+import { useRouter } from "next/navigation";
 
-const PokemonCard = () => {
-	const stats = [
-		{ icon: <HeartPlusIcon />, value: 102, label: "HP" },
-		{ icon: <RabbitIcon />, value: 90, label: "SPEED" },
-		{ icon: <SwordIcon />, value: 102, label: "ATTACK" },
-		{ icon: <ShieldIcon />, value: 76, label: "DEFENSE" },
-		{ icon: <WandSparklesIcon />, value: 102, label: "SP. ATK" },
-		{ icon: <ShieldPlusIcon />, value: 132, label: "SP. DEF" },
+const PokemonCard = ({
+	pokemon: { id, name, types, stats },
+}: {
+	pokemon: POKEMON;
+}) => {
+	const router = useRouter();
+
+	const pokemon_stats = [
+		{ icon: <HeartPlusIcon />, value: stats.hp, label: "HP" },
+		{ icon: <RabbitIcon />, value: stats.speed, label: "SPEED" },
+		{ icon: <SwordIcon />, value: stats.attack, label: "ATTACK" },
+		{
+			icon: <ShieldIcon />,
+			value: stats.defense,
+			label: "DEFENSE",
+		},
+		{
+			icon: <WandSparklesIcon />,
+			value: stats.special_attack,
+			label: "SP. ATK",
+		},
+		{
+			icon: <ShieldPlusIcon />,
+			value: stats.special_defense,
+			label: "SP. DEF",
+		},
 	];
 
 	return (
 		<Button
-			className="bg-sidebar rounded-lg h-40 border border-sidebar-border text-gray-400 flex flex-col"
+			className="bg-sidebar rounded-lg h-40 border border-sidebar-border text-gray-400 flex flex-col overflow-hidden"
 			variant="secondary"
+			onClick={() => router.push(`/pokemon/${id}`)}
 		>
 			<div className="flex items-center gap-2 w-full text-lg font-bold relative">
-				<span className="w-15 text-start">#1000</span>
-				<span className="absolute inset-x-0 text-center">PIKACHU</span>
+				<span className="w-15 text-start">{`#${id}`}</span>
+				<span className="absolute inset-x-0 text-center">
+					{name.toUpperCase()}
+				</span>
 			</div>
 			<div className="w-full h-full flex items-center gap-2">
 				<Image
-					src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-					alt="Pikachu image"
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+					alt={`${name} sprite image`}
 					width={100}
 					height={100}
 					className="h-25 w-auto"
 				/>
 				<div className="w-full h-full flex flex-col justify-between">
 					<div className="w-full flex justify-around mb-2">
-						<span className="font-bold bg-purple-700 px-2 py-0.5 rounded-lg text-black">
-							POISON
-						</span>
-						<span className="font-bold bg-purple-900 px-2 py-0.5 rounded-lg">
-							GHOST
-						</span>
+						{types.map((type) => {
+							const style = TYPE_STYLES[type] ?? {
+								bg: "#374151",
+								text: "#ffffff",
+							};
+							return (
+								<span
+									key={type}
+									className="font-bold px-2 py-0.5 rounded-lg"
+									style={{
+										backgroundColor: style.bg,
+										color: style.text,
+									}}
+								>
+									{type.toUpperCase()}
+								</span>
+							);
+						})}
 					</div>
 					<div className="flex-1 grid grid-cols-2 grid-rows-3">
-						{stats.map((s, i) => (
-							<HoverCard key={i}>
+						{pokemon_stats.map((stat) => (
+							<HoverCard key={stat.label}>
 								<HoverCardTrigger asChild>
 									<div className="flex items-center gap-2">
-										{s.icon}
-										<span>{s.value}</span>
+										{stat.icon}
+										<span>{stat.value}</span>
 									</div>
 								</HoverCardTrigger>
 								<HoverCardContent className="max-w-max whitespace-nowrap">
-									{s.label}
+									{stat.label}
 								</HoverCardContent>
 							</HoverCard>
 						))}
