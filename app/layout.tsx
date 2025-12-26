@@ -46,7 +46,7 @@ const RootLayout = async ({
 						<AppSidebar />
 						<div className="min-h-screen w-full flex flex-col py-2 gap-2">
 							<Header />
-							<main className="flex-1 w-full max-w-screen-2xl mx-auto px-4 py-2 text-gray-400">
+							<main className="flex-1 w-full container mx-auto px-4 py-2 text-gray-400">
 								{children}
 							</main>
 							<Footer />

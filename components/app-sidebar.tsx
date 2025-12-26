@@ -14,7 +14,6 @@ import {
 	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
-	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuButton,
@@ -31,29 +30,24 @@ import Link from "next/link";
 
 const items = [
 	{
-		title: "Home",
-		url: "#",
+		title: "Pokemon List",
+		url: "/pokemon",
 		icon: Home,
 	},
 	{
-		title: "Inbox",
-		url: "#",
+		title: "Pokemon Table",
+		url: "/pokemonTable",
+		icon: Home,
+	},
+	{
+		title: "Items",
+		url: "/items",
 		icon: Inbox,
 	},
 	{
-		title: "Calendar",
-		url: "#",
+		title: "Routes",
+		url: "/routes",
 		icon: Calendar,
-	},
-	{
-		title: "Search",
-		url: "#",
-		icon: Search,
-	},
-	{
-		title: "Settings",
-		url: "#",
-		icon: Settings,
 	},
 ];
 
@@ -79,23 +73,24 @@ export function AppSidebar() {
 			</SidebarHeader>
 			<SidebarSeparator className="mx-0" />
 			<SidebarContent>
-				<SidebarGroup>
-					<SidebarGroupLabel>Application</SidebarGroupLabel>
-					<SidebarGroupContent>
-						<SidebarMenu>
-							{items.map((item) => (
-								<SidebarMenuItem key={item.title}>
-									<SidebarMenuButton asChild>
-										<a href={item.url}>
-											<item.icon />
-											<span>{item.title}</span>
-										</a>
-									</SidebarMenuButton>
-								</SidebarMenuItem>
-							))}
-						</SidebarMenu>
-					</SidebarGroupContent>
-				</SidebarGroup>
+				<SidebarMenu>
+					<SidebarGroup>
+						<SidebarGroupContent>
+							<SidebarMenu>
+								{items.map((item) => (
+									<SidebarMenuItem key={item.title}>
+										<SidebarMenuButton asChild>
+											<a href={item.url}>
+												<item.icon />
+												<span>{item.title}</span>
+											</a>
+										</SidebarMenuButton>
+									</SidebarMenuItem>
+								))}
+							</SidebarMenu>
+						</SidebarGroupContent>
+					</SidebarGroup>
+				</SidebarMenu>
 			</SidebarContent>
 			<SidebarFooter>
 				<SidebarMenu>
