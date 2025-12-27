@@ -7,6 +7,8 @@ import Header from "@/components/Header";
 import { cookies } from "next/headers";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ReactQueryProvider from "@/components/react-query-provider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -36,23 +38,25 @@ const RootLayout = async ({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<SidebarProvider defaultOpen={defaultOpen}>
-						<AppSidebar />
-						<div className="min-h-screen w-full flex flex-col py-2 gap-2">
-							<Header />
-							<main className="flex-1 w-full container mx-auto px-4 py-2 text-gray-400">
-								{children}
-							</main>
-							<Footer />
-						</div>
-					</SidebarProvider>
-				</ThemeProvider>
+				<ReactQueryProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<SidebarProvider defaultOpen={defaultOpen}>
+							<AppSidebar />
+							<div className="min-h-screen w-full flex flex-col py-2 gap-2">
+								<Header />
+								<main className="flex-1 w-full container mx-auto px-4 py-2 text-gray-400">
+									{children}
+								</main>
+								<Footer />
+							</div>
+						</SidebarProvider>
+					</ThemeProvider>
+				</ReactQueryProvider>
 			</body>
 		</html>
 	);

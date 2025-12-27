@@ -15,33 +15,48 @@ import {
 	SwordIcon,
 	WandSparklesIcon,
 } from "lucide-react";
-import { TYPE_STYLES } from "@/data/tempData";
+import { TYPE_STYLES } from "@/data/data";
 import { useRouter } from "next/navigation";
 
 const PokemonCard = ({
 	pokemon: { id, name, types, stats },
 }: {
-	pokemon: POKEMON;
+	pokemon: Pokemon;
 }) => {
 	const router = useRouter();
 
 	const pokemon_stats = [
-		{ icon: <HeartPlusIcon />, value: stats.hp, label: "HP" },
-		{ icon: <RabbitIcon />, value: stats.speed, label: "SPEED" },
-		{ icon: <SwordIcon />, value: stats.attack, label: "ATTACK" },
+		{
+			icon: <HeartPlusIcon />,
+			value: stats.find((stat) => stat.stat.name === "hp")?.base_stat,
+			label: "HP",
+		},
+		{
+			icon: <RabbitIcon />,
+			value: stats.find((stat) => stat.stat.name === "speed")?.base_stat,
+			label: "SPEED",
+		},
+		{
+			icon: <SwordIcon />,
+			value: stats.find((stat) => stat.stat.name === "attack")?.base_stat,
+			label: "ATTACK",
+		},
 		{
 			icon: <ShieldIcon />,
-			value: stats.defense,
+			value: stats.find((stat) => stat.stat.name === "defense")
+				?.base_stat,
 			label: "DEFENSE",
 		},
 		{
 			icon: <WandSparklesIcon />,
-			value: stats.special_attack,
+			value: stats.find((stat) => stat.stat.name === "special-attack")
+				?.base_stat,
 			label: "SP. ATK",
 		},
 		{
 			icon: <ShieldPlusIcon />,
-			value: stats.special_defense,
+			value: stats.find((stat) => stat.stat.name === "special-defense")
+				?.base_stat,
 			label: "SP. DEF",
 		},
 	];
@@ -68,21 +83,21 @@ const PokemonCard = ({
 				/>
 				<div className="w-full h-full flex flex-col justify-between">
 					<div className="w-full flex justify-around mb-2">
-						{types.map((type) => {
-							const style = TYPE_STYLES[type] ?? {
+						{types.map(({ type: { name } }) => {
+							const style = TYPE_STYLES[name] ?? {
 								bg: "#374151",
 								text: "#ffffff",
 							};
 							return (
 								<span
-									key={type}
+									key={name}
 									className="font-bold px-2 py-0.5 rounded-lg"
 									style={{
 										backgroundColor: style.bg,
 										color: style.text,
 									}}
 								>
-									{type.toUpperCase()}
+									{name.toUpperCase()}
 								</span>
 							);
 						})}

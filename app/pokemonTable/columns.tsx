@@ -2,29 +2,8 @@
 
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import { capitalize } from "@/lib/utils";
-import { AccessorFn, ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-// export type Payment = {
-// 	id: string;
-// 	amount: number;
-// 	status: "pending" | "processing" | "success" | "failed";
-// 	name: string;
-// };
-
-export type Pokemon = {
-	id: number;
-	name: string;
-	height: number;
-	weight: number;
-	sprites: {
-		front_default: string;
-	};
-	types: { type: { name: string } }[];
-	stats: { base_stat: number; stat: { name: string } }[];
-};
 
 export const columns: ColumnDef<Pokemon>[] = [
 	{

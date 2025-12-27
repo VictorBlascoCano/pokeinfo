@@ -1,18 +1,19 @@
 declare global {
-	type POKEMON_STATS = {
-		hp: number;
-		attack: number;
-		defense: number;
-		special_attack: number;
-		special_defense: number;
-		speed: number;
-	};
-
-	type POKEMON = {
+	type Pokemon = {
 		id: number;
 		name: string;
-		types: string[];
-		stats: POKEMON_STATS;
+		height: number;
+		weight: number;
+		sprites: {
+			front_default: string;
+		};
+		types: { type: { name: string } }[];
+		stats: { base_stat: number; stat: { name: string } }[];
+	};
+
+	type NamedResources = {
+		name: string;
+		url: string;
 	};
 }
 
