@@ -19,7 +19,17 @@ import { TYPE_STYLES } from "@/data/data";
 import { useRouter } from "next/navigation";
 
 const PokemonCard = ({
-	pokemon: { id, name, types, stats },
+	pokemon: {
+		id,
+		name,
+		types,
+		hp,
+		speed,
+		attack,
+		defense,
+		sp_attack,
+		sp_defense,
+	},
 }: {
 	pokemon: Pokemon;
 }) => {
@@ -28,35 +38,32 @@ const PokemonCard = ({
 	const pokemon_stats = [
 		{
 			icon: <HeartPlusIcon />,
-			value: stats.find((stat) => stat.stat.name === "hp")?.base_stat,
+			value: hp,
 			label: "HP",
 		},
 		{
 			icon: <RabbitIcon />,
-			value: stats.find((stat) => stat.stat.name === "speed")?.base_stat,
+			value: speed,
 			label: "SPEED",
 		},
 		{
 			icon: <SwordIcon />,
-			value: stats.find((stat) => stat.stat.name === "attack")?.base_stat,
+			value: attack,
 			label: "ATTACK",
 		},
 		{
 			icon: <ShieldIcon />,
-			value: stats.find((stat) => stat.stat.name === "defense")
-				?.base_stat,
+			value: defense,
 			label: "DEFENSE",
 		},
 		{
 			icon: <WandSparklesIcon />,
-			value: stats.find((stat) => stat.stat.name === "special-attack")
-				?.base_stat,
+			value: sp_attack,
 			label: "SP. ATK",
 		},
 		{
 			icon: <ShieldPlusIcon />,
-			value: stats.find((stat) => stat.stat.name === "special-defense")
-				?.base_stat,
+			value: sp_defense,
 			label: "SP. DEF",
 		},
 	];
@@ -69,8 +76,8 @@ const PokemonCard = ({
 		>
 			<div className="flex items-center gap-2 w-full text-lg font-bold relative">
 				<span className="w-15 text-start">{`#${id}`}</span>
-				<span className="absolute inset-x-0 text-center">
-					{name.toUpperCase()}
+				<span className="absolute inset-x-0 text-center uppercase">
+					{name}
 				</span>
 			</div>
 			<div className="w-full h-full flex items-center gap-2">
@@ -83,21 +90,21 @@ const PokemonCard = ({
 				/>
 				<div className="w-full h-full flex flex-col justify-between">
 					<div className="w-full flex justify-around mb-2">
-						{types.map(({ type: { name } }) => {
-							const style = TYPE_STYLES[name] ?? {
+						{types.map((type) => {
+							const style = TYPE_STYLES[type] ?? {
 								bg: "#374151",
 								text: "#ffffff",
 							};
 							return (
 								<span
-									key={name}
-									className="font-bold px-2 py-0.5 rounded-lg"
+									key={type}
+									className="font-bold px-2 py-0.5 rounded-lg uppercase"
 									style={{
 										backgroundColor: style.bg,
 										color: style.text,
 									}}
 								>
-									{name.toUpperCase()}
+									{type}
 								</span>
 							);
 						})}

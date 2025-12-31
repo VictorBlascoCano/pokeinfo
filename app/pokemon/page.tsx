@@ -1,8 +1,8 @@
 import PokemonCard from "@/components/PokemonCard";
-import { fetchPokemon } from "@/lib/utils";
+import { fetchAllPokemon } from "@/lib/utils";
 
 const Pokemon = async () => {
-	const pokemons = await fetchPokemon();
+	const pokemons = await fetchAllPokemon(151);
 
 	return (
 		<div className="flex flex-col">

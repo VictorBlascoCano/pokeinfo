@@ -1,6 +1,5 @@
 "use client";
 
-import { PanelLeftIcon } from "lucide-react";
 import { ModeToggle } from "./ModeToggle";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
@@ -47,6 +46,14 @@ const Header = () => {
 								asChild
 							>
 								<Link href="/pokemon">Pokédex</Link>
+							</NavigationMenuLink>
+						</NavigationMenuItem>
+						<NavigationMenuItem>
+							<NavigationMenuLink
+								className="text-lg font-semibold"
+								asChild
+							>
+								<Link href="/pokemonTable">Pokédex Table</Link>
 							</NavigationMenuLink>
 						</NavigationMenuItem>
 						<NavigationMenuItem>

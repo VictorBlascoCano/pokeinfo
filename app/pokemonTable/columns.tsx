@@ -15,18 +15,14 @@ export const columns: ColumnDef<Pokemon>[] = [
 	{
 		accessorKey: "sprites",
 		header: "Image",
-		cell: ({ getValue }) => {
-			const sprites = getValue() as Pokemon["sprites"];
-			const src = sprites?.front_default;
-			if (!src) return null;
+		cell: ({ row }) => {
 			return (
 				<Image
-					src={src}
-					alt="pokemon front sprite"
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${row.original.id}.png`}
+					alt={`${row.original.name} front sprite`}
 					width={60}
 					height={60}
 					loading="lazy"
-					className="h-15 w-auto"
 				/>
 			);
 		},
@@ -40,68 +36,50 @@ export const columns: ColumnDef<Pokemon>[] = [
 	},
 	{
 		id: "type1",
-		accessorFn: (row) => row.types[0]?.type?.name ?? "",
+		accessorFn: (row) => row.types[0] ?? "",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Type 1" />
 		),
 	},
 	{
 		id: "type2",
-		accessorFn: (row) => row.types[1]?.type?.name ?? "",
+		accessorFn: (row) => row.types[1] ?? "",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Type 2" />
 		),
 	},
 	{
-		id: "hp",
-		accessorFn: (row) =>
-			row.stats.find((stat) => stat.stat.name === "hp")?.base_stat ?? 0,
+		accessorKey: "hp",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="HP" />
 		),
 	},
 	{
-		id: "attack",
-		accessorFn: (row) =>
-			row.stats.find((stat) => stat.stat.name === "attack")?.base_stat ??
-			0,
+		accessorKey: "attack",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Attack" />
 		),
 	},
 	{
-		id: "defense",
-		accessorFn: (row) =>
-			row.stats.find((stat) => stat.stat.name === "defense")?.base_stat ??
-			0,
+		accessorKey: "defense",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Defense" />
 		),
 	},
 	{
-		id: "special-attack",
-		accessorFn: (row) =>
-			row.stats.find((stat) => stat.stat.name === "special-attack")
-				?.base_stat ?? 0,
+		accessorKey: "sp_attack",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Sp. Attack" />
 		),
 	},
 	{
-		id: "special-defense",
-		accessorFn: (row) =>
-			row.stats.find((stat) => stat.stat.name === "special-defense")
-				?.base_stat ?? 0,
+		accessorKey: "sp_defense",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Sp. Defense" />
 		),
 	},
 	{
-		id: "speed",
-		accessorFn: (row) =>
-			row.stats.find((stat) => stat.stat.name === "speed")?.base_stat ??
-			0,
-
+		accessorKey: "speed",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Speed" />
 		),

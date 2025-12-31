@@ -1,9 +1,9 @@
 import { DataTable } from "@/components/ui/data-table";
 import { columns } from "./columns";
-import { fetchPokemon } from "@/lib/utils";
+import { fetchAllPokemon } from "@/lib/utils";
 
 const PokemonTable = async () => {
-	const data = await fetchPokemon();
+	const data = await fetchAllPokemon();
 
 	return (
 		<div className="flex flex-col">

@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { supabase } from "@/api/supabase";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -8,17 +9,37 @@ export function cn(...inputs: ClassValue[]) {
 export const capitalize = (s: string) =>
 	s ? s[0].toUpperCase() + s.slice(1) : s;
 
-export const fetchPokemon = async () => {
-	const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151"); // force-cache default
-	if (!res.ok) throw new Error("NO POKEMON");
+export const fetchAllPokemon = async (limit?: number) => {
+	let query = supabase
+		.from("pokemon")
+		.select()
+		.order("id", { ascending: true });
 
-	const { results: resources } = await res.json();
+	if (limit !== undefined) {
+		query = query.limit(limit);
+	}
 
-	const urls = resources.map((item: NamedResources) => item.url);
+	const { data, error } = await query;
 
-	const data = await Promise.all(
-		urls.map((url: string) => fetch(url).then((res) => res.json()))
-	);
+	if (error) {
+		console.error(error);
+		return [];
+	}
 
-	return data;
+	return data ?? [];
+};
+
+export const fetchPokemon = async (id: number) => {
+	const { data, error } = await supabase
+		.from("pokemon")
+		.select()
+		.eq("id", id)
+		.maybeSingle();
+
+	if (error) {
+		console.error(error);
+		return [];
+	}
+
+	return data ?? null;
 };

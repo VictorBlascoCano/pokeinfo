@@ -4,16 +4,13 @@ declare global {
 		name: string;
 		height: number;
 		weight: number;
-		sprites: {
-			front_default: string;
-		};
-		types: { type: { name: string } }[];
-		stats: { base_stat: number; stat: { name: string } }[];
-	};
-
-	type NamedResources = {
-		name: string;
-		url: string;
+		types: string[];
+		hp: number;
+		speed: number;
+		attack: number;
+		defense: number;
+		sp_attack: number;
+		sp_defense: number;
 	};
 }
 

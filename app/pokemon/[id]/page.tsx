@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { capitalize } from "@/lib/utils";
+import { capitalize, fetchPokemon } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 
 const PokemonPage = () => {
@@ -14,21 +14,19 @@ const PokemonPage = () => {
 		error,
 	} = useQuery({
 		queryKey: ["pokemon", id],
-		queryFn: async () => {
-			const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-			if (!res.ok) throw new Error("No pokemon");
-			return res.json();
-		},
+		queryFn: async () => fetchPokemon(Number(id)),
+		enabled: !!id,
 	});
 
 	if (isLoading) return <p>Cargando...</p>;
 	if (error) return <p>Error</p>;
+	if (!pokemon) return <p>No encontrado</p>;
 
 	return (
 		<div>
 			<h1 className="text-7xl font-bold">{capitalize(pokemon.name)}</h1>
 			<Image
-				src={`${pokemon.sprites?.front_default}`}
+				src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
 				alt={`${pokemon.name} sprite image`}
 				width={320}
 				height={320}
