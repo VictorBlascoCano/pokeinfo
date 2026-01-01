@@ -5,11 +5,11 @@ import Link from "next/link";
 
 const PokemonOfTheDay = () => {
 	return (
-		<section className="space-y-4">
+		<section className="h-full flex flex-col gap-4">
 			<h2 className="text-2xl font-bold text-white">
 				Pokémon of the Day
 			</h2>
-			<div className="flex flex-col items-center border-2 border-border p-4 gap-4 rounded-lg">
+			<div className="flex flex-col items-center flex-1 border-2 border-border p-4 gap-4 rounded-lg">
 				<div className="w-full flex justify-between">
 					<span className="text-3xl font-bold">#94</span>
 					<div className="flex gap-2">
@@ -51,12 +51,12 @@ const PokemonOfTheDay = () => {
 					</li>
 				</ul>
 				<Separator />
-				<p className="text-sm text-gray-300 leading-relaxed text-center">
+				<p className="text-sm text-gray-300 leading-relaxed text-center flex-1">
 					To steal the life of its target, it slips into the
 					prey&apos;s shadow and silently waits for an opportunity.
 				</p>
 				<Button
-					className="w-full h-10 rounded-lg bg-transparent border border-primary text-foreground hover:bg-primary hover:text-muted font-bold text-sm transition-all"
+					className="w-full h-10 mt-auto rounded-lg bg-transparent border border-primary text-foreground hover:bg-primary hover:text-muted font-bold text-sm transition-all"
 					asChild
 				>
 					<Link href="/pokemon/94">View Full Entry</Link>

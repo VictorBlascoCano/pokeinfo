@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Home = () => {
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-6">
 			<section className="relative w-full h-96 rounded overflow-hidden">
 				<Image
 					src="/banner.webp"
@@ -27,15 +27,15 @@ const Home = () => {
 					</p>
 				</div>
 			</section>
-			<div className="flex gap-8">
-				<div className="w-1/3">
+			<div className="flex gap-8 h-140">
+				<div className="w-1/3 h-full">
 					<PokemonOfTheDay />
 				</div>
-				<div className="w-2/3">
+				<div className="w-2/3 h-full">
 					<FeaturedNews />
 				</div>
 			</div>
-			<section className="bg-yellow-300 p-6 rounded-lg text-black flex items-center gap-30">
+			<section className="bg-yellow-300 p-6 rounded-lg text-black flex items-center gap-30 h-35">
 				<div>
 					<h2 className="text-xl font-bold">Join the Community</h2>
 					<p>
