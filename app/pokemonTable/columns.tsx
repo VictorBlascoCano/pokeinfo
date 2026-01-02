@@ -35,15 +35,13 @@ export const columns: ColumnDef<Pokemon>[] = [
 		cell: ({ getValue }) => capitalize(String(getValue() ?? "")),
 	},
 	{
-		id: "type1",
-		accessorFn: (row) => row.types[0] ?? "",
+		accessorKey: "type_1",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Type 1" />
 		),
 	},
 	{
-		id: "type2",
-		accessorFn: (row) => row.types[1] ?? "",
+		accessorKey: "type_2",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Type 2" />
 		),

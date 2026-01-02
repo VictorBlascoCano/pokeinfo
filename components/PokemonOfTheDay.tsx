@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import TypePill from "./TypePill";
 
 const PokemonOfTheDay = () => {
 	return (
@@ -13,12 +14,8 @@ const PokemonOfTheDay = () => {
 				<div className="w-full flex justify-between">
 					<span className="text-3xl font-bold">#94</span>
 					<div className="flex gap-2">
-						<span className="font-bold px-2 py-0.5 rounded-lg uppercase flex justify-center items-center bg-purple-500 text-foreground">
-							Ghost
-						</span>
-						<span className="font-bold px-2 py-0.5 rounded-lg uppercase flex justify-center items-center bg-purple-700 text-foreground">
-							Poison
-						</span>
+						<TypePill type="GHOST" />
+						<TypePill type="POISON" />
 					</div>
 				</div>
 				<Image

@@ -15,14 +15,15 @@ import {
 	SwordIcon,
 	WandSparklesIcon,
 } from "lucide-react";
-import { TYPE_STYLES } from "@/data/data";
 import { useRouter } from "next/navigation";
+import TypePill from "./TypePill";
 
 const PokemonCard = ({
 	pokemon: {
 		id,
 		name,
-		types,
+		type_1,
+		type_2,
 		hp,
 		speed,
 		attack,
@@ -89,25 +90,9 @@ const PokemonCard = ({
 					className="h-25 w-auto"
 				/>
 				<div className="w-full h-full flex flex-col justify-between">
-					<div className="w-full flex justify-around mb-2">
-						{types.map((type) => {
-							const style = TYPE_STYLES[type] ?? {
-								bg: "#374151",
-								text: "#ffffff",
-							};
-							return (
-								<span
-									key={type}
-									className="font-bold px-2 py-0.5 rounded-lg uppercase"
-									style={{
-										backgroundColor: style.bg,
-										color: style.text,
-									}}
-								>
-									{type}
-								</span>
-							);
-						})}
+					<div className="w-full flex justify-around gap-2 mb-2">
+						{type_1 && <TypePill type={type_1} />}
+						{type_2 && <TypePill type={type_2} />}
 					</div>
 					<div className="flex-1 grid grid-cols-2 grid-rows-3">
 						{pokemon_stats.map((stat) => (
