@@ -6,6 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+const TOTAL_POKEMON: number = 898;
+
 export const capitalize = (s: string) =>
 	s ? s[0].toUpperCase() + s.slice(1) : s;
 
@@ -43,3 +45,12 @@ export const fetchPokemon = async (id: number) => {
 
 	return data ?? null;
 };
+
+export function pokemonIdForToday() {
+	const today = new Date().toLocaleDateString("en-CA", {
+		timeZone: "Europe/Madrid",
+	});
+	// convierte la fecha en un número via hash simple (o días desde epoch)
+	const days = Math.floor(new Date(today).getTime() / (1000 * 60 * 60 * 24));
+	return (days % TOTAL_POKEMON) + 1;
+}
