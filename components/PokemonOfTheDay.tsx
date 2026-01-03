@@ -58,7 +58,14 @@ const PokemonOfTheDay = async () => {
 					</li>
 				</ul>
 				<Separator />
-				<p className="text-sm text-gray-300 leading-relaxed text-center flex-1">
+				<p
+					className="text-sm text-gray-300 leading-relaxed text-center my-auto overflow-hidden text-ellipsis"
+					style={{
+						display: "-webkit-box",
+						WebkitLineClamp: 3,
+						WebkitBoxOrient: "vertical",
+					}}
+				>
 					{pokemon.pokedex}
 				</p>
 				<Button

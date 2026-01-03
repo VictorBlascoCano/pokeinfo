@@ -7,7 +7,7 @@ const FeaturedNews = () => {
 			<div className="flex items-center">
 				<h2 className="text-2xl font-bold text-white">Featured News</h2>{" "}
 				<Link
-					href="/"
+					href="/news"
 					className="ml-auto font-bold text-yellow-200 hover:text-yellow-300"
 				>
 					View All

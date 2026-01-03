@@ -27,11 +27,11 @@ const Home = () => {
 					</p>
 				</div>
 			</section>
-			<div className="flex gap-8 h-140">
-				<div className="w-1/3 h-full">
+			<div className="flex flex-col sm:flex-row gap-8">
+				<div className="flex-1">
 					<PokemonOfTheDay />
 				</div>
-				<div className="w-2/3 h-full">
+				<div className="flex-2">
 					<FeaturedNews />
 				</div>
 			</div>
