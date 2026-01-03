@@ -53,7 +53,7 @@ const Header = () => {
 								className="text-lg font-semibold"
 								asChild
 							>
-								<Link href="/pokemonTable">Pokédex Table</Link>
+								<Link href="/">Moves</Link>
 							</NavigationMenuLink>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
@@ -61,7 +61,7 @@ const Header = () => {
 								className="text-lg font-semibold"
 								asChild
 							>
-								<Link href="/pokemon">Moves</Link>
+								<Link href="/">Abilities</Link>
 							</NavigationMenuLink>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
@@ -69,15 +69,7 @@ const Header = () => {
 								className="text-lg font-semibold"
 								asChild
 							>
-								<Link href="/pokemon">Abilities</Link>
-							</NavigationMenuLink>
-						</NavigationMenuItem>
-						<NavigationMenuItem>
-							<NavigationMenuLink
-								className="text-lg font-semibold"
-								asChild
-							>
-								<Link href="/pokemon">Items</Link>
+								<Link href="/">Items</Link>
 							</NavigationMenuLink>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
