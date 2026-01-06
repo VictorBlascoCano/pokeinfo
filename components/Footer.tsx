@@ -1,5 +1,5 @@
-import { Separator } from "./ui/separator";
-import { Button } from "./ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { XformerlyTwitter } from "@/icons/x";
 import { YouTube } from "@/icons/youtube";
 import Link from "next/link";

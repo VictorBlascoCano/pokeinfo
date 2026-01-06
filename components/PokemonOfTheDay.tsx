@@ -1,10 +1,12 @@
-export const revalidate = 86400; // 24 horas
+// export const revalidate = 86400; // 24 horas
+export const dynamic = "force-dynamic";
+export const revalidate = 0; // Disable caching
 
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import TypePill from "./TypePill";
+import TypePill from "@/components/TypePill";
 import { fetchPokemon, pokemonIdForToday } from "@/lib/utils";
 
 const PokemonOfTheDay = async () => {

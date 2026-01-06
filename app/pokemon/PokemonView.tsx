@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import ViewMode from "@/components/ViewMode";
 import PokemonCard from "@/components/PokemonCard";
 import { DataTable } from "@/components/ui/data-table";
@@ -16,8 +16,7 @@ const STORAGE_KEY = "pokemon_viewmode";
 const PokemonView = ({ pokemons, columns }: Props) => {
 	const [mode, setMode] = useState<"grid" | "table">("grid");
 
-	// Leer localStorage solo en el cliente después de la hidratación
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const saved =
 			typeof window !== "undefined"
 				? localStorage.getItem(STORAGE_KEY)

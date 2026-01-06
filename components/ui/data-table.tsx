@@ -21,8 +21,8 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import { DataTablePagination } from "./data-table-pagination";
-import { DataTableToolbar } from "./data-table-toolbar";
+import { DataTablePagination } from "@/components/ui/data-table-pagination";
+import { DataTableToolbar } from "@/components/ui/data-table-toolbar";
 import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {

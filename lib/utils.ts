@@ -47,10 +47,12 @@ export const fetchPokemon = async (id: number) => {
 };
 
 export function pokemonIdForToday() {
-	const today = new Date().toLocaleDateString("en-CA", {
-		timeZone: "Europe/Madrid",
-	});
-	// convierte la fecha en un número via hash simple (o días desde epoch)
-	const days = Math.floor(new Date(today).getTime() / (1000 * 60 * 60 * 24));
+	const now = new Date();
+	const utcDate = Date.UTC(
+		now.getUTCFullYear(),
+		now.getUTCMonth(),
+		now.getUTCDate()
+	);
+	const days = Math.floor(utcDate / (1000 * 60 * 60 * 24));
 	return (days % TOTAL_POKEMON) + 1;
 }

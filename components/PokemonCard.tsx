@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import TypePill from "./TypePill";
+import TypePill from "@/components/TypePill";
 
 const PokemonCard = ({
 	pokemon: { id, name, type_1, type_2 },
