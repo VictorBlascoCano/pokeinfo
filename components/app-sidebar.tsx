@@ -1,4 +1,4 @@
-import { ChevronUp, Home, User2 } from "lucide-react";
+import { Cat, ChevronUp, Home, User2 } from "lucide-react";
 import {
 	Sidebar,
 	SidebarContent,
@@ -29,7 +29,7 @@ const items = [
 	{
 		title: "Pokédex",
 		url: "/pokemon",
-		icon: Home,
+		icon: Cat,
 	},
 ];
 

@@ -28,9 +28,13 @@ const PokemonPage = () => {
 	if (error) return <p>Error</p>;
 	if (!pokemon) return <p>No encontrado</p>;
 
+	const pokemon_abilities_size =
+		(pokemon.abilities?.split(",").length ?? 0) +
+		(pokemon.hidden_abilities?.split(",").length ?? 0);
+
 	return (
 		<div>
-			<div className="flex gap-4 items-end mb-2">
+			<div className="flex gap-4 items-end mb-4">
 				<h1 className="text-7xl font-bold">
 					{capitalize(pokemon.name)}
 				</h1>
@@ -112,12 +116,17 @@ const PokemonPage = () => {
 										className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
 										style={{
 											display: "-webkit-box",
-											WebkitLineClamp: 1,
+											WebkitLineClamp:
+												pokemon_abilities_size < 3
+													? 3
+													: 1,
 											WebkitBoxOrient: "vertical",
 										}}
 									>
 										Ability description. Adding some text to
-										test this functionality
+										test this functionality aaa aaa aaaa aaa
+										aaa aaa aaa aaaa a aaa aaaa aaa aaa aaa
+										aaa aaaa
 									</p>
 								</div>
 							))}
@@ -139,12 +148,19 @@ const PokemonPage = () => {
 												className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
 												style={{
 													display: "-webkit-box",
-													WebkitLineClamp: 1,
+													WebkitLineClamp:
+														pokemon_abilities_size <
+														3
+															? 3
+															: 1,
 													WebkitBoxOrient: "vertical",
 												}}
 											>
 												Ability description. Adding some
 												text to test this functionality
+												aaa aaa aaaa aaa aaa aaa aaa
+												aaaa a aaa aaaa aaa aaa aaa aaa
+												aaaa
 											</p>
 										</div>
 									))}

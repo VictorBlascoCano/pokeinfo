@@ -14,7 +14,7 @@ const PokemonCard = ({
 
 	return (
 		<Button
-			className="bg-sidebar rounded-lg h-40 border border-sidebar-border text-gray-400 flex flex-col overflow-hidden"
+			className="bg-sidebar rounded-lg h-full border border-sidebar-border text-gray-400 flex flex-col overflow-hidden"
 			variant="secondary"
 			onClick={() => router.push(`/pokemon/${id}`)}
 		>
@@ -22,7 +22,7 @@ const PokemonCard = ({
 				<span className="uppercase">{name}</span>
 				<span>{`#${id}`}</span>
 			</div>
-			<div className="w-full h-full flex items-center gap-2">
+			<div className="w-full h-full flex flex-col sm:flex-row items-center gap-2">
 				<Image
 					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
 					alt={`${name} sprite image`}

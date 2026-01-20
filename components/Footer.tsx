@@ -8,14 +8,14 @@ const Footer = () => {
 	return (
 		<>
 			<Separator />
-			<footer className="flex justify-between items-center text-gray-400 w-full max-w-6xl mx-auto h-15">
+			<footer className="flex justify-between items-center gap-4 px-4 text-gray-400 w-full max-w-6xl mx-auto h-50 sm:h-15">
 				<p>© 2026 PokeWiki. Fan made site.</p>
-				<ul className="flex gap-8">
+				<ul className="flex flex-col sm:flex-row gap-2 sm:gap-8 list-disc sm:list-none">
 					<li>Privacy Policy</li>
 					<li>Terms of Service</li>
 					<li>Contact</li>
 				</ul>
-				<ul className="flex gap-4">
+				<ul className="flex flex-col sm:flex-row gap-6 sm:gap-4">
 					<li>
 						<Button variant="outline" asChild>
 							<Link

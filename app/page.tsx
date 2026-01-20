@@ -18,14 +18,14 @@ const Home = () => {
 					className="object-cover opacity-75"
 				/>
 				<div className="absolute inset-0 p-8">
-					<h2 className="[text-shadow:1px_1px_0_#000,-1px_1px_0_#000,1px_-1px_0_#000,-1px_-1px_0_#000] text-white text-6xl font-bold mb-2">
+					<h2 className="[text-shadow:1px_1px_0_#000,-1px_1px_0_#000,1px_-1px_0_#000,-1px_-1px_0_#000] text-white text-5xl sm:text-7xl font-bold mb-2">
 						Welcome to{" "}
 						<span className="text-yellow-300">Pokémon Azur</span>!
 					</h2>
-					<p className="[text-shadow:1px_1px_0_#000,-1px_1px_0_#000,1px_-1px_0_#000,-1px_-1px_0_#000] text-white text-xl">
+					<p className="[text-shadow:1px_1px_0_#000,-1px_1px_0_#000,1px_-1px_0_#000,-1px_-1px_0_#000] text-white text-lg sm:text-2xl">
 						The most comprehensive encyclopedia for trainers.
 					</p>
-					<p className="[text-shadow:1px_1px_0_#000,-1px_1px_0_#000,1px_-1px_0_#000,-1px_-1px_0_#000] text-white text-xl">
+					<p className="[text-shadow:1px_1px_0_#000,-1px_1px_0_#000,1px_-1px_0_#000,-1px_-1px_0_#000] text-white text-lg sm:text-2xl">
 						Explore over +1000 pokémon, items, routes an more!
 					</p>
 				</div>
@@ -38,20 +38,20 @@ const Home = () => {
 					<FeaturedNews />
 				</div>
 			</div>
-			<section className="bg-yellow-300 p-6 rounded-lg text-black flex items-center gap-30 h-35">
+			<section className="bg-yellow-300 p-6 rounded-lg text-black flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-8">
 				<div>
 					<h2 className="text-xl font-bold">Join the Community</h2>
-					<p>
+					<p className="max-w-xl">
 						Sign up for our newsletter to get the latest Pokémon
 						news, strategy guides, and wiki updates directly to your
 						inbox.
 					</p>
 				</div>
-				<div className="flex gap-2">
+				<div className="flex gap-2 flex-1 min-w-60">
 					<Input
 						type="email"
 						placeholder="Enter your email"
-						className="bg-white! w-80"
+						className="bg-white! max-w-100"
 					/>
 					<Button variant="secondary">Subscribe</Button>
 				</div>
