@@ -1,3 +1,6 @@
+// para que Vercel renueve el PokemonOfTheDay, ya que lo cachea (y ponerlo dentro del componente no funciona)
+export const revalidate = 86400; // 1 day
+
 import FeaturedNews from "@/components/FeaturedNews";
 import PokemonOfTheDay from "@/components/PokemonOfTheDay";
 import { Button } from "@/components/ui/button";

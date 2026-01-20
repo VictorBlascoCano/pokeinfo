@@ -1,7 +1,3 @@
-// export const revalidate = 86400; // 24 horas
-export const dynamic = "force-dynamic";
-export const revalidate = 0; // Disable caching
-
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";

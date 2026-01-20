@@ -5,6 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import ReactQueryProvider from "@/components/react-query-provider";
+import { cookies } from "next/headers";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -26,6 +29,9 @@ const RootLayout = async ({
 }: Readonly<{
 	children: React.ReactNode;
 }>) => {
+	const cookieStore = await cookies();
+	const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
+
 	return (
 		<html lang="en" className="dark" suppressHydrationWarning>
 			<body
@@ -38,13 +44,16 @@ const RootLayout = async ({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<div className="min-h-screen w-full flex flex-col gap-2">
-							<Header />
-							<main className="flex-1 w-full max-w-6xl mx-auto px-4 py-2 text-gray-400">
-								{children}
-							</main>
-							<Footer />
-						</div>
+						<SidebarProvider defaultOpen={defaultOpen}>
+							<AppSidebar />
+							<div className="min-h-screen w-full flex flex-col gap-2">
+								<Header />
+								<main className="flex-1 w-full max-w-6xl mx-auto px-4 py-2 text-gray-400">
+									{children}
+								</main>
+								<Footer />
+							</div>
+						</SidebarProvider>
 					</ThemeProvider>
 				</ReactQueryProvider>
 			</body>

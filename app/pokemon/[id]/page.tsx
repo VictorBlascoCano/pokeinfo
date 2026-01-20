@@ -41,14 +41,14 @@ const PokemonPage = () => {
 			<p className="max-w-xl">{pokemon.pokedex}</p>
 			<Separator className="my-4" />
 			<div className="grid grid-cols-8 grid-rows-4 gap-6 h-200">
-				<div className="border-2 border-accent p-4 rounded-lg col-span-4 row-span-3 flex flex-col justify-center items-center">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-4 row-span-3 flex flex-col justify-center items-center">
 					<div className="w-full flex justify-between">
 						<div className="flex gap-2">
 							<TypePill type={pokemon.type_1} />
 							<TypePill type={pokemon.type_2} />
 						</div>
 						<Button
-							variant="secondary"
+							variant="default"
 							onClick={() => setIsShiny((preVal) => !preVal)}
 							className="uppercase font-bold"
 						>
@@ -73,60 +73,149 @@ const PokemonPage = () => {
 						/>
 					)}
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-2 row-span-2 flex justify-center items-center">
-					<h2 className="uppercase">Physical Specs</h2>
+				<div className="bg-card flex flex-col gap-2 border-2 border-accent p-4 rounded-lg col-span-2 row-span-2">
+					<h2 className="uppercase text-xl font-bold">
+						Physical Specs
+					</h2>
+					<div className="flex-1 grid gap-4 grid-cols-2 grid-rows-2">
+						<div className="bg-background flex flex-col justify-center items-center p-4 rounded-lg col-span-1 row-span-1">
+							<h3>Height</h3>
+							<span className="font-bold text-xl">
+								{pokemon.height} m
+							</span>
+						</div>
+						<div className="bg-background flex flex-col justify-center items-center p-4 rounded-lg col-span-1 row-span-1">
+							<h3>Weight</h3>
+							<span className="font-bold text-xl">
+								{pokemon.weight} kg
+							</span>
+						</div>
+						<div className="bg-background flex flex-col justify-center items-center p-4 rounded-lg col-span-2 row-span-1">
+							<h3>Egg Groups</h3>
+							<span className="font-bold text-xl">
+								{pokemon.catch_rate}
+							</span>
+						</div>
+					</div>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-2 row-span-2 flex justify-center items-center">
-					<h2 className="uppercase">Abilities</h2>
+				<div className="bg-card flex flex-col gap-2 border-2 border-accent p-4 rounded-lg col-span-2 row-span-2">
+					<h2 className="uppercase text-xl font-bold">Abilities</h2>
+					<div className="flex-1 flex flex-col gap-2 justify-between">
+						<div className="flex flex-col gap-2">
+							{pokemon.abilities?.split(",").map((ability) => (
+								<div
+									key={ability}
+									className="bg-background p-2 rounded-lg font-bold text-xl"
+								>
+									{capitalize(ability)}
+									<p
+										className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
+										style={{
+											display: "-webkit-box",
+											WebkitLineClamp: 1,
+											WebkitBoxOrient: "vertical",
+										}}
+									>
+										Ability description. Adding some text to
+										test this functionality
+									</p>
+								</div>
+							))}
+						</div>
+						{pokemon.hidden_abilities && (
+							<div>
+								<h3 className="uppercase text-lg font-bold text-foreground/70">
+									HIDDEN
+								</h3>
+								{pokemon.hidden_abilities
+									?.split(",")
+									.map((hidden_ability) => (
+										<div
+											key={hidden_ability}
+											className="bg-background p-2 rounded-lg font-bold text-xl"
+										>
+											{capitalize(hidden_ability)}
+											<p
+												className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
+												style={{
+													display: "-webkit-box",
+													WebkitLineClamp: 1,
+													WebkitBoxOrient: "vertical",
+												}}
+											>
+												Ability description. Adding some
+												text to test this functionality
+											</p>
+										</div>
+									))}
+							</div>
+						)}
+					</div>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-4 row-span-3 flex justify-center items-center">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-4 row-span-3 flex justify-center items-center">
 					<h2 className="uppercase">Base Stats</h2>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Catch Rate
 					</h2>
-					<span>{pokemon.catch_rate}</span>
+					<span className="font-bold text-xl">
+						{pokemon.catch_rate}
+					</span>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Base Exp
 					</h2>
-					<span>{pokemon.happiness}</span>
+					<span className="font-bold text-xl">
+						{pokemon.happiness}
+					</span>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Growth Rate
 					</h2>
-					<span>{pokemon.happiness}</span>
+					<span className="font-bold text-xl">
+						{pokemon.happiness}
+					</span>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Happiness
 					</h2>
-					<span>{pokemon.happiness}</span>
+					<span className="font-bold text-xl">
+						{pokemon.happiness}
+					</span>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Generation
 					</h2>
-					<span>{pokemon.happiness}</span>
+					<span className="font-bold text-xl">
+						{pokemon.happiness}
+					</span>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">EVs</h2>
-					<span>{pokemon.happiness}</span>
+					<span className="font-bold text-xl">
+						{pokemon.happiness}
+					</span>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Hatch Steps
 					</h2>
-					<span>{pokemon.happiness}</span>
+					<span className="font-bold text-xl">
+						{pokemon.happiness}
+					</span>
 				</div>
-				<div className="border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Gender Ratio
 					</h2>
-					<span>{pokemon.happiness}</span>
+					<span className="font-bold text-xl">
+						{pokemon.happiness}
+					</span>
 				</div>
 			</div>
 		</div>

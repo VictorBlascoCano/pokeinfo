@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 const TOTAL_POKEMON: number = 898;
 
 export const capitalize = (s: string) =>
-	s ? s[0].toUpperCase() + s.slice(1) : s;
+	s ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s;
 
 export const fetchAllPokemon = async (limit?: number) => {
 	let query = supabase
@@ -51,7 +51,7 @@ export function pokemonIdForToday() {
 	const utcDate = Date.UTC(
 		now.getUTCFullYear(),
 		now.getUTCMonth(),
-		now.getUTCDate()
+		now.getUTCDate(),
 	);
 	const days = Math.floor(utcDate / (1000 * 60 * 60 * 24));
 	return (days % TOTAL_POKEMON) + 1;
