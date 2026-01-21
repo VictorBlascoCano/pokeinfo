@@ -14,11 +14,11 @@ const PokemonCard = ({
 
 	return (
 		<Button
-			className="bg-sidebar rounded-lg h-full border border-sidebar-border text-gray-400 flex flex-col overflow-hidden"
+			className="bg-sidebar rounded-lg p-4 h-full border border-sidebar-border text-gray-400 flex flex-col overflow-hidden"
 			variant="secondary"
 			onClick={() => router.push(`/pokemon/${id}`)}
 		>
-			<div className="flex items-center justify-between gap-2 w-full text-lg font-bold">
+			<div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-2 w-full text-lg font-bold">
 				<span className="uppercase">{name}</span>
 				<span>{`#${id}`}</span>
 			</div>
@@ -28,7 +28,7 @@ const PokemonCard = ({
 					alt={`${name} sprite image`}
 					width={100}
 					height={100}
-					className="h-25 w-auto"
+					className="w-full h-full object-contain"
 				/>
 				<div className="flex xl:flex-col gap-2">
 					{type_1 && <TypePill type={type_1} />}

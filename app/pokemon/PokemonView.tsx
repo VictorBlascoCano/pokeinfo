@@ -34,7 +34,7 @@ const PokemonView = ({ pokemons, columns }: Props) => {
 	return (
 		<div className="flex flex-col">
 			<div className="flex items-center mb-6">
-				<h1 className="text-4xl font-bold mr-auto">POKEMON</h1>
+				<h1 className="text-4xl font-bold mr-auto">POKÉMON</h1>
 				<ViewMode mode={mode} onChange={setMode} />
 			</div>
 

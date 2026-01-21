@@ -33,19 +33,19 @@ const PokemonPage = () => {
 		(pokemon.hidden_abilities?.split(",").length ?? 0);
 
 	return (
-		<div>
+		<div className="flex flex-col">
 			<div className="flex gap-4 items-end mb-4">
-				<h1 className="text-7xl font-bold">
+				<h1 className="text-5xl sm:text-7xl font-bold">
 					{capitalize(pokemon.name)}
 				</h1>
-				<span className="text-4xl font-bold text-amber-100">
+				<span className="text-2xl sm:text-4xl font-bold text-amber-100">
 					#{pokemon.id}
 				</span>
 			</div>
 			<p className="max-w-xl">{pokemon.pokedex}</p>
 			<Separator className="my-4" />
-			<div className="grid grid-cols-8 grid-rows-4 gap-6 h-200">
-				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-4 row-span-3 flex flex-col justify-center items-center">
+			<div className="grid grid-cols-2 sm:grid-cols-8 grid-rows-10 sm:grid-rows-5 gap-6 auto-rows-fr">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-2 sm:col-span-4 row-span-3 flex flex-col justify-center items-center">
 					<div className="w-full flex justify-between">
 						<div className="flex gap-2">
 							<TypePill type={pokemon.type_1} />
@@ -65,7 +65,7 @@ const PokemonPage = () => {
 							alt={`${pokemon.name} shiny sprite image`}
 							width={320}
 							height={320}
-							className="h-full w-auto"
+							className="h-full w-auto object-contain"
 						/>
 					) : (
 						<Image
@@ -73,15 +73,15 @@ const PokemonPage = () => {
 							alt={`${pokemon.name} sprite image`}
 							width={320}
 							height={320}
-							className="h-full w-auto"
+							className="h-full w-auto object-contain"
 						/>
 					)}
 				</div>
-				<div className="bg-card flex flex-col gap-2 border-2 border-accent p-4 rounded-lg col-span-2 row-span-2">
+				<div className="bg-card flex flex-col gap-2 border-2 border-accent p-4 rounded-lg col-span-1 sm:col-span-2 row-span-2">
 					<h2 className="uppercase text-xl font-bold">
 						Physical Specs
 					</h2>
-					<div className="flex-1 grid gap-4 grid-cols-2 grid-rows-2">
+					<div className="flex-1 grid gap-4 grid-cols-1 sm:grid-cols-2 grid-rows-3 sm:grid-rows-2">
 						<div className="bg-background flex flex-col justify-center items-center p-4 rounded-lg col-span-1 row-span-1">
 							<h3>Height</h3>
 							<span className="font-bold text-xl">
@@ -94,7 +94,7 @@ const PokemonPage = () => {
 								{pokemon.weight} kg
 							</span>
 						</div>
-						<div className="bg-background flex flex-col justify-center items-center p-4 rounded-lg col-span-2 row-span-1">
+						<div className="bg-background flex flex-col justify-center items-center p-4 rounded-lg col-span-1 sm:col-span-2 row-span-1">
 							<h3>Egg Groups</h3>
 							<span className="font-bold text-xl">
 								{pokemon.catch_rate}
@@ -102,7 +102,7 @@ const PokemonPage = () => {
 						</div>
 					</div>
 				</div>
-				<div className="bg-card flex flex-col gap-2 border-2 border-accent p-4 rounded-lg col-span-2 row-span-2">
+				<div className="bg-card flex flex-col gap-2 border-2 border-accent p-4 rounded-lg col-span-1 sm:col-span-2 row-span-2">
 					<h2 className="uppercase text-xl font-bold">Abilities</h2>
 					<div className="flex-1 flex flex-col gap-2 justify-between">
 						<div className="flex flex-col gap-2">
@@ -168,7 +168,7 @@ const PokemonPage = () => {
 						)}
 					</div>
 				</div>
-				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-4 row-span-3 flex justify-center items-center">
+				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-2 sm:col-span-4 row-span-3 flex justify-center items-center">
 					<h2 className="uppercase">Base Stats</h2>
 				</div>
 				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">

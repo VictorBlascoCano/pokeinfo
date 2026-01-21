@@ -23,6 +23,7 @@ export const columns: ColumnDef<Pokemon>[] = [
 					width={60}
 					height={60}
 					loading="lazy"
+					className="w-full h-full object-contain"
 				/>
 			);
 		},
