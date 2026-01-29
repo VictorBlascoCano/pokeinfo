@@ -1,8 +1,9 @@
 import { TYPE_INFO } from "@/data/data";
 
-const TypePill = ({ type }: { type: string }) => {
-	const t = TYPE_INFO[type];
+const TypePill = ({ type }: { type: Type | null }) => {
+	if (!type) return null;
 
+	const t = TYPE_INFO[type.id];
 	if (!t) return null;
 
 	return (
@@ -14,7 +15,7 @@ const TypePill = ({ type }: { type: string }) => {
 				borderTopColor: t.borderTop,
 			}}
 		>
-			{t.label}
+			{type.name}
 		</span>
 	);
 };

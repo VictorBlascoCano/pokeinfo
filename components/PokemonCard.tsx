@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import TypePill from "@/components/TypePill";
 
 const PokemonCard = ({
-	pokemon: { id, name, type_1, type_2 },
+	pokemon: { id, name, type_1, type_2, pokedex_number },
 }: {
 	pokemon: Pokemon;
 }) => {
@@ -20,11 +20,11 @@ const PokemonCard = ({
 		>
 			<div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-2 w-full text-lg font-bold">
 				<span className="uppercase">{name}</span>
-				<span>{`#${id}`}</span>
+				<span>{`#${pokedex_number}`}</span>
 			</div>
 			<div className="w-full h-full flex flex-col sm:flex-row items-center gap-2">
 				<Image
-					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedex_number}.png`}
 					alt={`${name} sprite image`}
 					width={100}
 					height={100}

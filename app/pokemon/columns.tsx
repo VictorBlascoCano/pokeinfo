@@ -1,15 +1,14 @@
 "use client";
 
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
-import { capitalize } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 
 export const columns: ColumnDef<Pokemon>[] = [
 	{
-		accessorKey: "id",
+		accessorKey: "pokedex_number",
 		header: ({ column }) => (
-			<DataTableColumnHeader column={column} title="ID" />
+			<DataTableColumnHeader column={column} title="Num" />
 		),
 	},
 	{
@@ -18,7 +17,7 @@ export const columns: ColumnDef<Pokemon>[] = [
 		cell: ({ row }) => {
 			return (
 				<Image
-					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${row.original.id}.png`}
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${row.original.pokedex_number}.png`}
 					alt={`${row.original.name} front sprite`}
 					width={60}
 					height={60}
@@ -33,19 +32,24 @@ export const columns: ColumnDef<Pokemon>[] = [
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Name" />
 		),
-		cell: ({ getValue }) => capitalize(String(getValue() ?? "")),
 	},
 	{
-		accessorKey: "type_1",
+		id: "type_1",
+		accessorFn: (row) => row.type_1?.name ?? "",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Type 1" />
 		),
+		cell: ({ getValue }) => getValue() as string,
+		sortingFn: "alphanumeric",
 	},
 	{
-		accessorKey: "type_2",
+		id: "type_2",
+		accessorFn: (row) => row.type_2?.name ?? "",
 		header: ({ column }) => (
 			<DataTableColumnHeader column={column} title="Type 2" />
 		),
+		cell: ({ getValue }) => getValue() as string,
+		sortingFn: "alphanumeric",
 	},
 	{
 		accessorKey: "hp",

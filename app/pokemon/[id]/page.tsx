@@ -2,12 +2,13 @@
 
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { capitalize, fetchPokemon } from "@/lib/utils";
+import { fetchPokemon } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import TypePill from "@/components/TypePill";
 import { useState } from "react";
+import { Mars, Venus } from "lucide-react";
 
 const PokemonPage = () => {
 	const { id } = useParams();
@@ -20,7 +21,7 @@ const PokemonPage = () => {
 		error,
 	} = useQuery<Pokemon>({
 		queryKey: ["pokemon", id],
-		queryFn: async () => fetchPokemon(Number(id)),
+		queryFn: async () => fetchPokemon({ id: String(id) }),
 		enabled: !!id,
 	});
 
@@ -29,17 +30,18 @@ const PokemonPage = () => {
 	if (!pokemon) return <p>No encontrado</p>;
 
 	const pokemon_abilities_size =
-		(pokemon.abilities?.split(",").length ?? 0) +
-		(pokemon.hidden_abilities?.split(",").length ?? 0);
+		(pokemon.ability_1 ? 1 : 0) +
+		(pokemon.ability_2 ? 1 : 0) +
+		(pokemon.hidden_ability ? 1 : 0);
 
 	return (
 		<div className="flex flex-col">
 			<div className="flex gap-4 items-end mb-4">
 				<h1 className="text-5xl sm:text-7xl font-bold">
-					{capitalize(pokemon.name)}
+					{pokemon.name}
 				</h1>
 				<span className="text-2xl sm:text-4xl font-bold text-amber-100">
-					#{pokemon.id}
+					#{pokemon.pokedex_number}
 				</span>
 			</div>
 			<p className="max-w-xl">{pokemon.pokedex}</p>
@@ -61,7 +63,7 @@ const PokemonPage = () => {
 					</div>
 					{isShiny ? (
 						<Image
-							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemon.id}.png`}
+							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemon.pokedex_number}.png`}
 							alt={`${pokemon.name} shiny sprite image`}
 							width={320}
 							height={320}
@@ -69,7 +71,7 @@ const PokemonPage = () => {
 						/>
 					) : (
 						<Image
-							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_number}.png`}
 							alt={`${pokemon.name} sprite image`}
 							width={320}
 							height={320}
@@ -106,12 +108,14 @@ const PokemonPage = () => {
 					<h2 className="uppercase text-xl font-bold">Abilities</h2>
 					<div className="flex-1 flex flex-col gap-2 justify-between">
 						<div className="flex flex-col gap-2">
-							{pokemon.abilities?.split(",").map((ability) => (
+							{pokemon.ability_1 && (
 								<div
-									key={ability}
+									key={pokemon.ability_1.id}
 									className="bg-background p-2 rounded-lg font-bold text-xl"
 								>
-									{capitalize(ability)}
+									<h4 className="text-sm uppercase">
+										{pokemon.ability_1.name}
+									</h4>
 									<p
 										className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
 										style={{
@@ -123,47 +127,60 @@ const PokemonPage = () => {
 											WebkitBoxOrient: "vertical",
 										}}
 									>
-										Ability description. Adding some text to
-										test this functionality aaa aaa aaaa aaa
-										aaa aaa aaa aaaa a aaa aaaa aaa aaa aaa
-										aaa aaaa
+										{pokemon.ability_1.description}
 									</p>
 								</div>
-							))}
+							)}
+							{pokemon.ability_2 && (
+								<div
+									key={pokemon.ability_2.id}
+									className="bg-background p-2 rounded-lg font-bold text-xl"
+								>
+									<h4 className="text-sm uppercase">
+										{pokemon.ability_2.name}
+									</h4>
+									<p
+										className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
+										style={{
+											display: "-webkit-box",
+											WebkitLineClamp:
+												pokemon_abilities_size < 3
+													? 3
+													: 1,
+											WebkitBoxOrient: "vertical",
+										}}
+									>
+										{pokemon.ability_2.description}
+									</p>
+								</div>
+							)}
 						</div>
-						{pokemon.hidden_abilities && (
+						{pokemon.hidden_ability && (
 							<div>
 								<h3 className="uppercase text-lg font-bold text-foreground/70">
 									HIDDEN
 								</h3>
-								{pokemon.hidden_abilities
-									?.split(",")
-									.map((hidden_ability) => (
-										<div
-											key={hidden_ability}
-											className="bg-background p-2 rounded-lg font-bold text-xl"
-										>
-											{capitalize(hidden_ability)}
-											<p
-												className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
-												style={{
-													display: "-webkit-box",
-													WebkitLineClamp:
-														pokemon_abilities_size <
-														3
-															? 3
-															: 1,
-													WebkitBoxOrient: "vertical",
-												}}
-											>
-												Ability description. Adding some
-												text to test this functionality
-												aaa aaa aaaa aaa aaa aaa aaa
-												aaaa a aaa aaaa aaa aaa aaa aaa
-												aaaa
-											</p>
-										</div>
-									))}
+								<div
+									key={pokemon.hidden_ability.id}
+									className="bg-background p-2 rounded-lg font-bold text-xl"
+								>
+									<h4 className="text-sm uppercase">
+										{pokemon.hidden_ability.name}
+									</h4>
+									<p
+										className="text-xs text-foreground/50  whitespace-normal text-start overflow-hidden text-ellipsis"
+										style={{
+											display: "-webkit-box",
+											WebkitLineClamp:
+												pokemon_abilities_size < 3
+													? 3
+													: 1,
+											WebkitBoxOrient: "vertical",
+										}}
+									>
+										{pokemon.hidden_ability.description}
+									</p>
+								</div>
 							</div>
 						)}
 					</div>
@@ -184,7 +201,7 @@ const PokemonPage = () => {
 						Base Exp
 					</h2>
 					<span className="font-bold text-xl">
-						{pokemon.happiness}
+						{pokemon.base_exp}
 					</span>
 				</div>
 				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
@@ -192,7 +209,7 @@ const PokemonPage = () => {
 						Growth Rate
 					</h2>
 					<span className="font-bold text-xl">
-						{pokemon.happiness}
+						{pokemon.growth_rate?.name}
 					</span>
 				</div>
 				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
@@ -208,29 +225,36 @@ const PokemonPage = () => {
 						Generation
 					</h2>
 					<span className="font-bold text-xl">
-						{pokemon.happiness}
+						{pokemon.generation}
 					</span>
 				</div>
 				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">EVs</h2>
-					<span className="font-bold text-xl">
-						{pokemon.happiness}
-					</span>
+					<span className="font-bold text-xl">TODO</span>
 				</div>
 				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Hatch Steps
 					</h2>
 					<span className="font-bold text-xl">
-						{pokemon.happiness}
+						{pokemon.hatch_steps}
 					</span>
 				</div>
 				<div className="bg-card border-2 border-accent p-4 rounded-lg col-span-1 row-span-1 flex flex-col justify-center items-center gap-4">
 					<h2 className="uppercase text-center font-bold">
 						Gender Ratio
 					</h2>
-					<span className="font-bold text-xl">
-						{pokemon.happiness}
+
+					<span className="font-bold text-sm flex items-center gap-2">
+						<Mars />
+						{pokemon.gender_ratio?.percentage ?? 0} %
+					</span>
+					<span className="font-bold text-sm flex items-center gap-2">
+						<Venus />
+						{pokemon.gender_ratio?.percentage
+							? 100 - pokemon.gender_ratio.percentage
+							: 0}{" "}
+						%
 					</span>
 				</div>
 			</div>

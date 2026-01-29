@@ -2,11 +2,11 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { supabase } from "@/api/supabase";
 
+const TOTAL_POKEMON: number = 898;
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
-
-const TOTAL_POKEMON: number = 898;
 
 export const capitalize = (s: string) =>
 	s ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s;
@@ -14,8 +14,13 @@ export const capitalize = (s: string) =>
 export const fetchAllPokemon = async (limit?: number) => {
 	let query = supabase
 		.from("pokemon")
-		.select()
-		.order("id", { ascending: true });
+		.select(
+			`*,
+            type_1: types!pokemones_type_1_fkey(id, name),
+            type_2: types!pokemones_type_2_fkey(id, name)
+        `,
+		)
+		.order("pokedex_number", { ascending: true });
 
 	if (limit !== undefined) {
 		query = query.limit(limit);
@@ -31,12 +36,38 @@ export const fetchAllPokemon = async (limit?: number) => {
 	return data ?? [];
 };
 
-export const fetchPokemon = async (id: number) => {
-	const { data, error } = await supabase
-		.from("pokemon")
-		.select()
-		.eq("id", id)
-		.maybeSingle();
+export const fetchPokemon = async ({
+	id,
+	pokedex_number,
+}: {
+	id?: string;
+	pokedex_number?: number;
+}) => {
+	if (!id && !pokedex_number) return null;
+
+	let query = supabase.from("pokemon").select(`
+            *,
+            color: pokemon_colors(*),
+            gender_ratio: pokemon_gender_ratios(*),
+            growth_rate: pokemon_growth_rates(*),
+            habitat: pokemon_habitats(*),
+            shape: pokemon_shapes(*),
+            category: pokemon_categories(*),
+            hidden_ability: abilities!pokemones_hidden_ability_fkey(*),
+            ability_1: abilities!pokemones_ability_1_fkey(*),
+            ability_2: abilities!pokemones_ability_2_fkey(*),
+            incense: items!pokemones_incense_fkey(*),
+            wild_item_common: items!pokemones_wild_item_common_fkey(*),
+            wild_item_uncommon: items!pokemones_wild_item_uncommon_fkey(*),
+            wild_item_rare: items!pokemones_wild_item_rare_fkey(*),
+            type_1: types!pokemones_type_1_fkey(*),
+            type_2: types!pokemones_type_2_fkey(*)
+        `);
+
+	if (id) query = query.eq("id", id);
+	if (pokedex_number) query = query.eq("pokedex_number", pokedex_number);
+
+	const { data, error } = await query.maybeSingle();
 
 	if (error) {
 		console.error(error);

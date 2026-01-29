@@ -31,7 +31,7 @@ interface DataTableProps<TData, TValue> {
 	type?: string;
 }
 
-export function DataTable<TData extends { id: number }, TValue>({
+export function DataTable<TData extends { id: string }, TValue>({
 	columns,
 	data,
 	type,
@@ -40,7 +40,7 @@ export function DataTable<TData extends { id: number }, TValue>({
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-		{}
+		{},
 	);
 
 	const table = useReactTable({
@@ -76,8 +76,8 @@ export function DataTable<TData extends { id: number }, TValue>({
 												: flexRender(
 														header.column.columnDef
 															.header,
-														header.getContext()
-												  )}
+														header.getContext(),
+													)}
 										</TableHead>
 									);
 								})}
@@ -95,7 +95,7 @@ export function DataTable<TData extends { id: number }, TValue>({
 									onClick={() =>
 										type &&
 										router.push(
-											`${type}/${row.original.id}`
+											`${type}/${row.original.id}`,
 										)
 									}
 									className={
@@ -111,7 +111,7 @@ export function DataTable<TData extends { id: number }, TValue>({
 										>
 											{flexRender(
 												cell.column.columnDef.cell,
-												cell.getContext()
+												cell.getContext(),
 											)}
 										</TableCell>
 									))}

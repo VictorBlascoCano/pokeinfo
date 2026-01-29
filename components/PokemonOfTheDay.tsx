@@ -7,7 +7,7 @@ import { fetchPokemon, pokemonIdForToday } from "@/lib/utils";
 
 const PokemonOfTheDay = async () => {
 	const id = pokemonIdForToday();
-	const pokemon: Pokemon = await fetchPokemon(id);
+	const pokemon: Pokemon = await fetchPokemon({ pokedex_number: id });
 
 	if (!pokemon) {
 		return <h1>Pokémon not available</h1>;
@@ -20,14 +20,16 @@ const PokemonOfTheDay = async () => {
 			</h2>
 			<div className="flex flex-col items-center flex-1 border-2 border-border p-4 gap-4 rounded-lg">
 				<div className="w-full flex justify-between">
-					<span className="text-3xl font-bold">#{pokemon.id}</span>
+					<span className="text-3xl font-bold">
+						#{pokemon.pokedex_number}
+					</span>
 					<div className="flex gap-2">
 						<TypePill type={pokemon.type_1} />
 						<TypePill type={pokemon.type_2} />
 					</div>
 				</div>
 				<Image
-					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_number}.png`}
 					alt={`${pokemon.name} sprite`}
 					width={150}
 					height={150}
