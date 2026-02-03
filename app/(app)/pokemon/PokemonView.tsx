@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
 import ViewMode from "@/components/ViewMode";
 import PokemonCard from "@/components/PokemonCard";
 import { DataTable } from "@/components/ui/data-table";
@@ -9,33 +8,15 @@ import type { ColumnDef } from "@tanstack/react-table";
 type Props = {
 	pokemons: Pokemon[];
 	columns: ColumnDef<Pokemon>[];
+	mode: "grid" | "table";
 };
 
-const STORAGE_KEY = "pokemon_viewmode";
-
-const PokemonView = ({ pokemons, columns }: Props) => {
-	const [mode, setMode] = useState<"grid" | "table">("grid");
-
-	useLayoutEffect(() => {
-		const saved =
-			typeof window !== "undefined"
-				? localStorage.getItem(STORAGE_KEY)
-				: null;
-		if (saved === "table") {
-			// eslint-disable-next-line react-hooks/set-state-in-effect
-			setMode("table");
-		}
-	}, []);
-
-	useEffect(() => {
-		localStorage.setItem(STORAGE_KEY, mode);
-	}, [mode]);
-
+const PokemonView = ({ pokemons, columns, mode }: Props) => {
 	return (
 		<div className="flex flex-col">
 			<div className="flex items-center mb-6">
 				<h1 className="text-4xl font-bold mr-auto">POKÉMON</h1>
-				<ViewMode mode={mode} onChange={setMode} />
+				<ViewMode mode={mode} />
 			</div>
 
 			{mode === "grid" ? (

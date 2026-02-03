@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { supabase } from "@/api/supabase";
+import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 
 const TOTAL_POKEMON: number = 898;
 
@@ -12,6 +12,7 @@ export const capitalize = (s: string) =>
 	s ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s;
 
 export const fetchAllPokemon = async (limit?: number) => {
+	const supabase = await createSupabaseServerClient();
 	let query = supabase
 		.from("pokemon")
 		.select(
@@ -45,6 +46,7 @@ export const fetchPokemon = async ({
 }) => {
 	if (!id && !pokedex_number) return null;
 
+	const supabase = await createSupabaseServerClient();
 	let query = supabase.from("pokemon").select(`
             *,
             color: pokemon_colors(*),

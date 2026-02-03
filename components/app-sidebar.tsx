@@ -19,6 +19,7 @@ import {
 } from "./ui/dropdown-menu";
 import Link from "next/link";
 import Image from "next/image";
+import { cookies } from "next/headers";
 
 const items = [
 	{
@@ -33,7 +34,10 @@ const items = [
 	},
 ];
 
-export function AppSidebar() {
+export async function AppSidebar() {
+	const cookieStore = await cookies();
+	const savedMode = cookieStore.get("pokemon_viewmode")?.value;
+
 	return (
 		<Sidebar variant="floating" collapsible="icon">
 			<SidebarHeader>
@@ -68,10 +72,17 @@ export function AppSidebar() {
 								{items.map((item) => (
 									<SidebarMenuItem key={item.title}>
 										<SidebarMenuButton asChild>
-											<a href={item.url}>
+											<Link
+												href={
+													item.url === "/pokemon" &&
+													savedMode
+														? `${item.url}?view=${savedMode}`
+														: item.url
+												}
+											>
 												<item.icon />
 												<span>{item.title}</span>
-											</a>
+											</Link>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
 								))}

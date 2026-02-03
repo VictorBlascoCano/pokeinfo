@@ -1,33 +1,14 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import Image from "next/image";
-import { fetchPokemon } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import TypePill from "@/components/TypePill";
 import { useState } from "react";
 import { Mars, Venus } from "lucide-react";
 
-const PokemonPage = () => {
-	const { id } = useParams();
-
+const PokemonClient = ({ pokemon }: { pokemon: Pokemon }) => {
 	const [isShiny, setIsShiny] = useState(false);
-
-	const {
-		data: pokemon,
-		isLoading,
-		error,
-	} = useQuery<Pokemon>({
-		queryKey: ["pokemon", id],
-		queryFn: async () => fetchPokemon({ id: String(id) }),
-		enabled: !!id,
-	});
-
-	if (isLoading) return <p>Cargando...</p>;
-	if (error) return <p>Error</p>;
-	if (!pokemon) return <p>No encontrado</p>;
 
 	const pokemon_abilities_size =
 		(pokemon.ability_1 ? 1 : 0) +
@@ -262,4 +243,4 @@ const PokemonPage = () => {
 	);
 };
 
-export default PokemonPage;
+export default PokemonClient;
